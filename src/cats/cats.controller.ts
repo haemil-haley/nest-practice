@@ -1,5 +1,6 @@
-import { Controller, Delete, Get, Patch, Post, Put } from "@nestjs/common";
+import { Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Put } from "@nestjs/common";
 import { CatsService } from "./cats.service";
+import { PositiveIntPipe } from "../pipes/positivie.int.pipe";
 
 @Controller('cats')
 export class CatsController {
@@ -11,9 +12,10 @@ export class CatsController {
     return 'all cat';
   }
 
+  // cats/:id
   @Get(':id')
-  getOneCat()  {
-    return 'one cat';
+  getOneCat(@Param('id', ParseIntPipe, PositiveIntPipe) param: number)  {
+    return 'get one cat';
   }
 
   @Post()
